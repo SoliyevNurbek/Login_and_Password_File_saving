@@ -1,0 +1,149 @@
+#include <iostream>
+#include <string.h>
+#include<fstream>
+#include <vector>
+using namespace std;
+
+struct regist{
+string ism;
+string fam;
+string log;
+string pas;
+};
+
+regist obadmin[10],obticher[10],obstudent[10];
+void fxx(int m){
+        int i=0;
+        if(m==1){
+                while(i<5){
+                ofstream adminob("admin.txt",ios::app);
+                    cout<<"Ismi : ";cin>>obadmin[i].ism;
+                        adminob<<obadmin[i].ism << " ";
+                    cout<<"Familyasi : ";cin>>obadmin[i].fam;
+                        adminob<<obadmin[i].fam << " ";
+                    cout<<"Login : ";cin>>obadmin[i].log;
+                        adminob<<obadmin[i].log << " ";
+                    cout<<"Parol : ";cin>>obadmin[i].pas;
+                        adminob<<obadmin[i].pas << " ";
+                        adminob << endl;
+                adminob.close();
+        i++;
+        }}
+        else if(m==2){
+                while(i<5){
+                ofstream ticherob("ticher.txt",ios::app);
+                    cout<<"Ismi : ";cin>>obticher[i].ism;
+                        ticherob<<obticher[i].ism << " ";
+                    cout<<"Familyasi : ";cin>>obticher[i].fam;
+                        ticherob<<obticher[i].fam << " ";
+                    cout<<"Login : ";cin>>obticher[i].log;
+                        ticherob<<obticher[i].log << " ";
+                    cout<<"Parol : ";cin>>obticher[i].pas;
+                        ticherob<<obticher[i].pas << " ";
+                        ticherob << endl;
+                ticherob.close();
+         i++;
+        }}
+        else if(m==3){
+                while(i<5){
+                ofstream studentob("student.txt",ios::app);
+                    cout<<"Ismi : ";cin>>obstudent[i].ism;
+                        studentob<<obstudent[i].ism << " ";
+                    cout<<"Familyasi : ";cin>>obstudent[i].fam;
+                        studentob<<obstudent[i].fam << " ";
+                    cout<<"Login : ";cin>>obstudent[i].log;
+                        studentob<<obstudent[i].log << " ";
+                    cout<<"Parol : ";cin>>obstudent[i].pas;
+                        studentob<<obstudent[i].pas << " ";
+                        studentob << endl;
+                studentob.close();
+        i++;
+        }}
+}
+
+void funk(string a,vector <string> &vec){
+    string b="";
+    a += " ";
+    for(int i=0;i<a.size();i++){
+        if(a[i]!=' '){
+            b += a[i];
+        }
+        else{
+            vec.insert(vec.end(),b);
+            b = "";
+        }
+
+    }
+}
+
+void exx(string xlog,string xpas){
+    ifstream fi("admin.txt");
+    ifstream li("ticher.txt");
+    ifstream si("student.txt");
+    string f,l,s;
+    vector <string> fec,lec,sec;
+    while(getline(fi,f)){
+        funk(f,fec);
+        if(fec[2]==xlog and fec[3]==xpas){
+            cout <<"\n Ma`lumotlar \n"<< f;
+            break;
+        }
+        else{
+            fec.clear();
+        }
+    }
+    while(getline(li,l)){
+        funk(l,lec);
+        if(lec[2]==xlog and lec[3]==xpas){
+            cout <<"\n Ma`lumotlar \n"<< l;
+            break;
+        }
+        else{
+            lec.clear();
+        }
+    }
+    while(getline(si,s)){
+        funk(s,sec);
+        if(sec[2]==xlog and sec[3]==xpas){
+            cout <<"\n Ma`lumotlar \n"<< s;
+            break;
+        }
+        else{
+            sec.clear();
+        }
+    }
+}
+
+void axx(){
+    cout<<" 1 : Ruyhatdan utish "<<'\n';
+    cout<<" 2 : Login parol "<<'\n';
+    cout<<"Yunalishni kursating : ";
+}
+
+void txx(){
+    cout<<" 1 : Adminga utish "<<'\n';
+    cout<<" 2 : Ticherga utish "<<'\n';
+    cout<<" 3 : studentga utish "<<'\n';
+    cout<<"Yunalishni kursating : ";
+}
+
+int main(){
+int n,m;
+string log1,pas1;
+        axx();
+        cin>>n;
+        if(n==1){
+            txx();
+            cin>>m;
+            fxx(m);
+        }
+        else if(n==2){
+            cout<<"Loginni kiriting : ";cin>>log1;
+            cout<<"Parolni  kiriting : ";cin>>pas1;
+            exx(log1,pas1);
+        }
+        else{
+            cout<<"Yunalish hato ! ";
+        }
+return 0;
+}
